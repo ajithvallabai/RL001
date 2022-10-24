@@ -9,6 +9,8 @@ Prerequisties:
 Phase 1 (2 month)
 
 - Develop four custom RL environments/games using pygame, python, stablebaseline3 eg: snakegame, ping pong etc (Try to develop own games as much as possible)
+- Single player mode (4)
+- Multi player mode (4)
 
 Phase 2 (3 month)
 
