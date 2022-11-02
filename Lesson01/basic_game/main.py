@@ -1,39 +1,62 @@
 import cv2 as cv
 import numpy as np
 import random
-import time
 import copy
 
-def snakeBody(arrOld1, arrNew1, img):
-    for each in arrOld1:
-        cv.rectangle(img, each[0], each[1], (0,0,0), 5)
-    for each in arrNew1:
-        cv.rectangle(img, each[0], each[1], (255,255,255), 5)
+def snakeBody(arr, img):
+    cv.rectangle(img, arr, arr, (255,255,255), 5)
     return img
-img = np.zeros((512, 512, 1), dtype="uint8")
 
+def dtCollisionBoundaries(arr):
+    if (arr[0] >= 512) or (arr[0] <= 0):
+        return True
+    if (arr[1] >= 512) or (arr[1] <= 0):
+        return True
+    return False
 
-arrOld = [[[410,320],[410,320]], [[415,320],[415,320]]]
-arrNew = [[[410,320],[410,320]], [[415,320],[415,320]]]
-img = snakeBody(arrOld, arrNew, img)
+def dtFood(arr, arrFood):
+    if np.linalg.norm(np.array(arr)-np.array(foodArr)) < 14:
+        return True
+    return False
 
+img = np.zeros((512, 512, 3), dtype="uint8")
+
+# Food
+foodArr = [random.randint(1, 511), random.randint(1, 511)]
+cv.rectangle(img, foodArr, foodArr, (0,255,0), 10)
+
+arr = [410,320]
+img = snakeBody(arr, img)
+key = 97 # default key left
 
 while True:
-    # snake body
-    cv.imshow("Single channel window", img)
-    #make snake to roll
-    print("hi")
-    if cv.waitKey(0) == ord('a'):
-        for each in range(0,2):
-            arrNew[each][0][0] = arrOld[each][0][0]-5
-            arrNew[each][1][0] = arrOld[each][1][0]-5
-        print(arrOld)
-        print(arrNew)
-        img = snakeBody(arrOld, arrNew, img)
-        time.sleep(0.5)
-        cv.imshow("Single channel window", img)
-        arrOld = copy.deepcopy(arrNew)
-    print("after loop")
-    #cv.waitKey(0)
+    done = False
+    cv.imshow("The Slytherin Dot game", img)
+    if key == ord('a'):
+        arr[0] = arr[0] - 5
+    elif key == ord('d'):
+        arr[0] = arr[0] + 5
+    elif key == ord('w'):
+        arr[1] = arr[1] - 5
+    elif key == ord('s'):
+        arr[1] = arr[1] + 5
+    elif key == ord('q'):
+        break
 
-    cv.destroyAllWindows()
+    # detect collision with boudaries
+    if dtCollisionBoundaries(arr) == True:
+        print("collision with boundaries")
+        break
+
+    # check if snake has found the food
+    if dtFood(arr, foodArr) == True:
+        foodArr = [random.randint(1, 511), random.randint(1, 511)]
+        print("Food fetched")
+
+    img = np.zeros((512, 512, 3), dtype="uint8")
+    cv.rectangle(img, foodArr, foodArr, (0,255,0), 10)
+
+    img = snakeBody(arr, img)
+    k = cv.waitKey(400)
+    if k != -1:
+        key = copy.deepcopy(k)
