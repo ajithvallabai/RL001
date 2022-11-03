@@ -5,7 +5,7 @@ import numpy as np
 import random
 import copy
 
-SNAKE_LEN_GOAL = 15
+FOOD_FETCH_GOAL = 15
 
 def snakeBody(dot, img):
     cv.rectangle(img, dot, dot, (255,255,255), 5)
@@ -32,7 +32,7 @@ class SnakeEnv(Env):
         # Define action and observation space
         # Using discrete action
         self.action_space = spaces.Discrete(4)
-        self.observation_space = spaces.Box(low=-500, high=500, shape=((5+SNAKE_LEN_GOAL),), dtype=np.float64)
+        self.observation_space = spaces.Box(low=-500, high=500, shape=((5+FOOD_FETCH_GOAL),), dtype=np.float64)
 
     def step(self, action):
         self.prev_actions.append(action)
@@ -118,8 +118,8 @@ class SnakeEnv(Env):
         apple_delta_x = head_x - self.foodLoc[0]
         apple_delta_y = head_y - self.foodLoc[1]
         snake_score = self.score
-        self.prev_actions = deque(maxlen=SNAKE_LEN_GOAL)
-        for _ in range(SNAKE_LEN_GOAL):
+        self.prev_actions = deque(maxlen=FOOD_FETCH_GOAL)
+        for _ in range(FOOD_FETCH_GOAL):
             self.prev_actions.append(-1)
 
         self.observation = [head_x, head_y, apple_delta_x, apple_delta_y, snake_score] + list(self.prev_actions)
