@@ -111,9 +111,13 @@ if __name__ == "__main__":
         elif key == ord('d'):
             arr[0] = arr[0] + 5
         elif key == ord('w'):
-            arr[0] = arr[0] + 5
             arr[1] = arr[1] - 5
         elif key == ord('s'):
+            arr[1] = arr[1] + 5
+        elif key == ord('e'):
+            arr[0] = arr[0] + 5
+            arr[1] = arr[1] - 5
+        elif key == ord('z'):
             arr[0] = arr[0] + 5
             arr[1] = arr[1] + 5
         elif key == ord('q'):
