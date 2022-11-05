@@ -1,19 +1,19 @@
-# RL001 - Online Course
+### RL001 - Reinforcement learning
 
-Develop custom reinforcement learning models and deploy in hardware
+Learn to create custom environment in Reinforcement learning
 
 Prerequisties:
 - Python
 - Reinforcement learning basics
 
-Phase 1 (2 month)
+### Lesson 01 Dots And Lines
 
-- Develop four custom RL environments/games using pygame, python, stablebaseline3 eg: snakegame, ping pong etc (Try to develop own games as much as possible)
-- Single player mode (4)
-- Multi player mode (4)
+| Lesson        | Environment    |Method | Link |
+| ------------  | -----          | ---- | ----  |
+| Dots And Lines|   Snake    |  Discrete action, non image  observation | [here](./Lesson_01_DotsAndLines/snake_rl/discrete_nonimage/train.py)
+| Dots And Lines|   Snake    |  Discrete action, image  observation   | [here](./Lesson_01_DotsAndLines/snake_rl/discrete_image/train.py) (In progress)
+| Dots And Lines|   Car    |  Discrete action, non image  observation | [here](./Lesson_01_DotsAndLines/car_rl/discrete_nonimage/train.py)
+| Dots And Lines|   Car    |  Discrete action, image  observation     | [here](./Lesson_01_DotsAndLines/car_rl/discrete_image/train.py) (In progress)
+| Dots And Lines|   Bird    |  Discrete action, non image  observation| [here](./Lesson_01_DotsAndLines/bird_rl/discrete_nonimage/train.py)
+| Dots And Lines|   Bird    |  Discrete action, image  observation    | [here](./Lesson_01_DotsAndLines/bird_rl/discrete_image/train.py) (In progress)
 
-Phase 2 (3 month)
-
-- Develop and deploy in line following robot with RL
-- Develop and deploy in a robot that goes inside a lane without dashing with RL
-- Develop a car that can touch all free points (where obstacles are not there) in a floor without dashing any obstacle (Need to explore methods for sensor data)
