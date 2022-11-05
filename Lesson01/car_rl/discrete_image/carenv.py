@@ -100,7 +100,9 @@ class CarEnv(Env):
 
         if self.done and (destReached==False):
             # For colliding with boundaries
-            self.reward -= 200
+            # if below reward is -200 then agent would decide to terminate continuously sometimes
+            # instead of reaching its goal
+            self.reward -= 20
         elif self.done and destReached:
             # Fetching current food
             self.reward += (self.score * 1000)
@@ -121,7 +123,7 @@ class CarEnv(Env):
         # dest_delta_y = head_y - ((self.destPts[0][1] + self.destPts[1][1])/2)
         self.previousFrames = self.previousFrames[1:] #poping first frame
 
-        currFrame = self.img[(92-42): (92 + 42), (427-42): (427+42)]
+        currFrame = self.img[(self.dot[0]-42): (self.dot[0] + 42), (self.dot[1]-42): (self.dot[1]+42)]
         self.previousFrames.append(currFrame)
         # print(self.previousFrames[0].shape)
         # print(self.previousFrames[3].shape)
