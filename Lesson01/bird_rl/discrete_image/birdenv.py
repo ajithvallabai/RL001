@@ -97,9 +97,10 @@ def collisionWithHind(arr):
     if ((541-5) <= arr[0] <= (541+5)) and (69 <= arr[1] <= 231):
         return True
     return False
-BUFFER_MEMORY = 40
-XDIM = 84
-YDIM = 84
+BUFFER_MEMORY = 4
+XDIM = 64
+YDIM = 64
+# TODO: Form a frame as its not able to fetch frames at boundaries
 class BirdEnv(Env):
     """Bird Environment that follows gym interface"""
 
@@ -111,7 +112,6 @@ class BirdEnv(Env):
         self.observation_space = spaces.Box(low=0, high=255, shape=(XDIM,YDIM,3*BUFFER_MEMORY), dtype=np.uint8)
 
     def step(self, action):
-        #self.prev_actions.append(action)
         cv.imshow("The Bird Dot game", self.img)
         self.key = action
         previousArr = copy.deepcopy(self.dot)
@@ -172,7 +172,7 @@ class BirdEnv(Env):
             self.reward += (self.score * 1000)
         elif currDistToDest < prevDistToDest:
             # staying alive and moving towards from food
-            self.reward += 1
+            self.reward += 2
         else:
             # staying alive and moving away from food
             self.reward -= 1
@@ -180,24 +180,21 @@ class BirdEnv(Env):
         # head_x, heady_y, dest_delta_x, dest_delta_y, previous_moves
         self.destPts = np.array([[840, 470], [840, 70]],
                 np.int32)
-        # head_x = self.dot[0]
-        # head_y = self.dot[1]
-        # # Using change towards midpoint as a observation(p1.x+p2.x)/2, (p1.y+p2.y)/2
-        # dest_delta_x = head_x - ((self.destPts[0][0] + self.destPts[1][0])/2)
-        # dest_delta_y = head_y - ((self.destPts[0][1] + self.destPts[1][1])/2)
-        # self.observation = [head_x, head_y, dest_delta_x, dest_delta_y] + list(self.prev_actions)
-        self.previousFrames = self.previousFrames[1:] #poping first frame
-
-        currFrame = self.img[(self.dot[0]-42): (self.dot[0] + 42), (self.dot[1]-42): (self.dot[1]+42)]
-        self.previousFrames.append(currFrame)
-        self.observation = np.swapaxes(self.previousFrames,2,1).reshape(84,84,3*BUFFER_MEMORY)
+        self.previousFrames = self.previousFrames[:, :, 3:] #poping first frame
+        currFrame = self.img[(self.dot[1]-32): (self.dot[1]+32), (self.dot[0]-32): (self.dot[0] + 32)]
+        # cv.imshow("The frame ", currFrame)
+        # cv.waitKey(0)
+        self.previousFrames = np.dstack((self.previousFrames, currFrame))
+        self.observation = self.previousFrames
+        # cv.imshow("The frame ", self.observation[:,:, :3])
+        # cv.waitKey(0)
         info = {}
         return self.observation, self.reward, self.done, info
 
     def reset(self):
         self.done = False
-        self.dot = [59,268]
-        #self.dot = [125,142]
+        self.initalize = [[141, 138], [304, 287], [59,268], [655, 289],[516, 356]]
+        self.dot =  self.initalize[np.random.randint(5)]
         self.img = getDisplay(self.dot)
 
         self.score = 0
@@ -205,24 +202,12 @@ class BirdEnv(Env):
         self.key = 1 # default key right
 
         # observation
-        # head_x, heady_y, dest_delta_x, dest_delta_y, snake_score, previous_moves
         self.destPts = np.array([[840, 470], [840, 70]],
                 np.int32)
-        # head_x = self.dot[0]
-        # head_y = self.dot[1]
-        # # Using change towards midpoint as a observation(p1.x+p2.x)/2, (p1.y+p2.y)/2
-        # dest_delta_x = head_x - ((self.destPts[0][0] + self.destPts[1][0])/2)
-        # dest_delta_y = head_y - ((self.destPts[0][1] + self.destPts[1][1])/2)
+        self.previousFrames = np.zeros((XDIM, YDIM, 3),dtype=np.uint8)
+        b = np.zeros((XDIM, YDIM, 3),dtype=np.uint8)
 
-        # self.prev_actions = deque(maxlen=BUFFER_MEMORY)
-        # for _ in range(BUFFER_MEMORY):
-        #     self.prev_actions.append(-1)
-
-        # self.observation = [head_x, head_y, dest_delta_x, dest_delta_y] + list(self.prev_actions)
-        # self.observation = np.array(self.observation, dtype=np.float64)
-        self.previousFrames = []
-        for _ in range(BUFFER_MEMORY):
-            self.previousFrames.append(np.zeros((XDIM, YDIM, 3),dtype=np.uint8))
-
-        self.observation = np.swapaxes(self.previousFrames,2,1).reshape(84,84,3*BUFFER_MEMORY)
+        for _ in range(BUFFER_MEMORY-1):
+            self.previousFrames = np.dstack((self.previousFrames, b))
+        self.observation = self.previousFrames
         return self.observation
