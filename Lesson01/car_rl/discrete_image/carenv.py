@@ -43,9 +43,9 @@ def getDisplay(arr):
                         thickness)
     return img
 
-BUFFER_MEMORY = 30
-XDIM = 84
-YDIM = 84
+BUFFER_MEMORY = 4
+XDIM = 64
+YDIM = 64
 class CarEnv(Env):
     """Car Environment that follows gym interface"""
 
@@ -100,42 +100,37 @@ class CarEnv(Env):
 
         if self.done and (destReached==False):
             # For colliding with boundaries
-            # if below reward is -200 then agent would decide to terminate continuously sometimes
-            # instead of reaching its goal
             self.reward -= 20
         elif self.done and destReached:
             # Fetching current food
             self.reward += (self.score * 1000)
         elif currDistToDest < prevDistToDest:
             # staying alive and moving towards from food
-            self.reward += 3
+            self.reward += 1
         else:
             # staying alive and moving away from food
-            self.reward -= 2
+            self.reward -= 1
         print("#######Reward########", self.reward)
 
         self.destPts = np.array([[40, 70], [160, 70]],
                 np.int32)
-        # head_x = self.dot[0]
-        # head_y = self.dot[1]
-        # # Using change towards midpoint as a observation(p1.x+p2.x)/2, (p1.y+p2.y)/2
-        # dest_delta_x = head_x - ((self.destPts[0][0] + self.destPts[1][0])/2)
-        # dest_delta_y = head_y - ((self.destPts[0][1] + self.destPts[1][1])/2)
-        self.previousFrames = self.previousFrames[1:] #poping first frame
+        self.previousFrames = self.previousFrames[:, :, 3:] #poping first frame
 
-        currFrame = self.img[(self.dot[0]-42): (self.dot[0] + 42), (self.dot[1]-42): (self.dot[1]+42)]
-        self.previousFrames.append(currFrame)
-        # print(self.previousFrames[0].shape)
-        # print(self.previousFrames[3].shape)
-        # self.observation = np.concatenate([self.previousFrames[3],
-        #                      self.previousFrames[2],self.previousFrames[1],self.previousFrames[0]],axis=-1)
-        self.observation = np.swapaxes(self.previousFrames,2,1).reshape(84,84,90)
+        #currFrame = self.img[(self.dot[0]-32): (self.dot[0] + 32), (self.dot[1]-32): (self.dot[1]+32)]
+        currFrame = self.img[(self.dot[1]-32): (self.dot[1]+32), (self.dot[0]-32): (self.dot[0] + 32)]
+        # cv.imshow("The frame ", currFrame)
+        # cv.waitKey(0)
+        self.previousFrames = np.dstack((self.previousFrames, currFrame))
+        self.observation = copy.deepcopy(self.previousFrames)
+        # cv.imshow("The frame ", self.observation[:,:, :3])
+        # cv.waitKey(0)
         info = {}
         return self.observation, self.reward, self.done, info
 
     def reset(self):
         self.done = False
-        self.dot = [92,427]
+        self.initalize = [[92, 427], [63, 324], [138, 300],[99, 155]]
+        self.dot = self.initalize[np.random.randint(4)]
         self.img = getDisplay(self.dot)
 
         self.score = 0
@@ -146,16 +141,11 @@ class CarEnv(Env):
         # previous move frames
         self.destPts = np.array([[40, 70], [160, 70]],
                 np.int32)
-        # head_x = self.dot[0]
-        # head_y = self.dot[1]
-        # # Using change towards midpoint as a observation(p1.x+p2.x)/2, (p1.y+p2.y)/2
-        # dest_delta_x = head_x - ((self.destPts[0][0] + self.destPts[1][0])/2)
-        # dest_delta_y = head_y - ((self.destPts[0][1] + self.destPts[1][1])/2)
 
-        self.previousFrames = []
-        for _ in range(BUFFER_MEMORY):
-            self.previousFrames.append(np.zeros((XDIM, YDIM, 3),dtype=np.uint8))
+        self.previousFrames = np.zeros((XDIM, YDIM, 3),dtype=np.uint8)
+        b = np.zeros((XDIM, YDIM, 3),dtype=np.uint8)
 
-        self.observation = np.swapaxes(self.previousFrames,2,1).reshape(84,84,90)
-        #print(self.observation.shape)
+        for _ in range(BUFFER_MEMORY-1):
+            self.previousFrames = np.dstack((self.previousFrames, b))
+        self.observation = self.previousFrames
         return self.observation
