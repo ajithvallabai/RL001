@@ -4,7 +4,7 @@ import cv2 as cv
 import numpy as np
 import copy
 
-def carBody(arr, img):
+def birdBody(arr, img):
     cv.rectangle(img, arr, arr, (255,255,255), 5)
     return img
 
@@ -22,7 +22,7 @@ def dtDestination(arr):
 
 def getDisplay(arr):
     img = np.zeros((512, 900, 3), dtype="uint8")
-    img = carBody(arr, img)
+    img = birdBody(arr, img)
     boundaryPts = np.array([[40, 70], [40, 470],
                     [840, 470], [840, 70]],
                 np.int32)
