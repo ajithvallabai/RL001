@@ -43,7 +43,7 @@ def getDisplay(arr):
                         thickness)
     return img
 
-BUFFER_MEMORY = 4
+BUFFER_MEMORY = 1
 XDIM = 64
 YDIM = 64
 class CarEnv(Env):
@@ -90,17 +90,19 @@ class CarEnv(Env):
         # Using distance parameters and awarding reward
         # distance between a line and point
         # d = norm(np.cross(p2-p1, p1-p3))/norm(p2-p1)
-        currDistToDest = np.linalg.norm(
-            np.cross( (self.destPts[1]-self.destPts[0]),(self.destPts[1]-np.array(self.dot) ) )
-            )/ np.linalg.norm(self.destPts[1] - self.destPts[0])
+        # currDistToDest = np.linalg.norm(
+        #     np.cross( (self.destPts[1]-self.destPts[0]),(self.destPts[1]-np.array(self.dot) ) )
+        #     )/ np.linalg.norm(self.destPts[1] - self.destPts[0])
 
-        prevDistToDest = np.linalg.norm(
-            np.cross( (self.destPts[1]-self.destPts[0]),(self.destPts[1]-np.array(previousArr) ) )
-            )/ np.linalg.norm(self.destPts[1] - self.destPts[0])
-
+        # prevDistToDest = np.linalg.norm(
+        #     np.cross( (self.destPts[1]-self.destPts[0]),(self.destPts[1]-np.array(previousArr) ) )
+        #     )/ np.linalg.norm(self.destPts[1] - self.destPts[0])
+        midDest = [(self.destPts[0]+ self.destPts[0])/2, (self.destPts[1]+self.destPts[1])/2]
+        currDistToDest = np.linalg.norm(np.array(self.dot)-np.array(midDest))
+        prevDistToDest = np.linalg.norm(np.array(self.dot)-np.array(midDest))
         if self.done and (destReached==False):
             # For colliding with boundaries
-            self.reward -= 20
+            self.reward -= 400
         elif self.done and destReached:
             # Fetching current food
             self.reward += (self.score * 1000)

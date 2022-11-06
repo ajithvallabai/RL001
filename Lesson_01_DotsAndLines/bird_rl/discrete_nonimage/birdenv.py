@@ -55,10 +55,10 @@ def getDisplay(arr):
     isClosed = True
     thickness = 8
     img = cv.polylines(img, [boundaryPts],
-                        isClosed, (0, 255, 0),
+                        isClosed, (0, 0, 255),
                         thickness)
     img = cv.polylines(img, [destPts],
-                        isClosed, (0, 0, 255),
+                        isClosed,  (0, 255, 0),
                         thickness)
     img = cv.polylines(img, [hindPts1],
                         isClosed, (120, 120, 0),
