@@ -10,10 +10,10 @@ Prerequisties:
 
 | Lesson        | Environment    |Method | Link |
 | ------------  | -----          | ---- | ----  |
-| Dots And Lines|   Snake    |  Discrete action, non image  observation | [here](./Lesson_01_DotsAndLines/snake_rl/discrete_nonimage/train.py)
-| Dots And Lines|   Snake    |  Discrete action, image  observation   | [here](./Lesson_01_DotsAndLines/snake_rl/discrete_image/train.py) (In progress)
-| Dots And Lines|   Car    |  Discrete action, non image  observation | [here](./Lesson_01_DotsAndLines/car_rl/discrete_nonimage/train.py)
-| Dots And Lines|   Car    |  Discrete action, image  observation     | [here](./Lesson_01_DotsAndLines/car_rl/discrete_image/train.py) (In progress)
-| Dots And Lines|   Bird    |  Discrete action, non image  observation| [here](./Lesson_01_DotsAndLines/bird_rl/discrete_nonimage/train.py)
-| Dots And Lines|   Bird    |  Discrete action, image  observation    | [here](./Lesson_01_DotsAndLines/bird_rl/discrete_image/train.py) (In progress)
+| Dots And Lines|   Snake    |  Discrete action, non image  observation | [here](./Lesson_01_DotsAndLines/snake_rl/discrete_nonimage/)
+| Dots And Lines|   Snake    |  Discrete action, image  observation   | [here](./Lesson_01_DotsAndLines/snake_rl/discrete_image/) (In progress)
+| Dots And Lines|   Car    |  Discrete action, non image  observation | [here](./Lesson_01_DotsAndLines/car_rl/discrete_nonimage/)
+| Dots And Lines|   Car    |  Discrete action, image  observation     | [here](./Lesson_01_DotsAndLines/car_rl/discrete_image/) (In progress)
+| Dots And Lines|   Bird    |  Discrete action, non image  observation| [here](./Lesson_01_DotsAndLines/bird_rl/discrete_nonimage/)
+| Dots And Lines|   Bird    |  Discrete action, image  observation    | [here](./Lesson_01_DotsAndLines/bird_rl/discrete_image/) (In progress)
 

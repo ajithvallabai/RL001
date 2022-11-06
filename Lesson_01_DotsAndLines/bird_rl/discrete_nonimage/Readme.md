@@ -1,4 +1,4 @@
-### Dots And Lines - The Slytherin Dot game
+### Dots And Lines - The Bird Dot game
 
 **Contents**
  - Wiki
@@ -18,7 +18,7 @@
 
 **Wiki**
 
-- Name: The Slytherin Dot game
+- Name: The Bird Dot game
 - Category: Box2D
 
 **GIF's**
@@ -26,7 +26,7 @@
 **Description :**
 - Uses discrete action space
 - Boundaries are the collision points
-- Dot should move towards food and fetch it
+- Dot should move towards green line and reach it
 
 **Environment**
 
@@ -45,8 +45,7 @@ Type : Box(20)
 |  1  |    heady_y  |  0    | 512    | 256    |
 |  2  |    delta_x(dest)   |  0    |  512   | 256    |
 |  3  |    delta_y(dest)   |  0    |  512   | 256    |
-|  4  |    snake_score| 0   |  15    |  7   |
-|  5 - 19  |    previous_moves | 0    |  3   | 1 |
+|  4 - 18  |    previous_moves | 0    |  3   | 1 |
 **Action**
 
 Type : Box(4)
@@ -57,22 +56,25 @@ Type : Box(4)
 |  1  |    right  |  0    | 1    |
 |  2  |    up   |  0    |  1   |
 |  3  |    down   |  0    |  1   |
+|  4  |    up-right   |  0    |  1   |
+|  5  |    down-right   |  0    |  1   |
 
 
 **Rewards**
 | Situation | Points |
 | ------    | ------ |
-|   Collision with boundaries  |   -20     |
-|   Fetching food              |   score*100     |
+|   Collision with boundaries  |   -40     |
+|   Fetching food              |   score*1000   |
 |   Moving towards food        |   1     |
 |   Moving away from food      |   -1     |
 
 **Starting State**
 
-- Origin - (410,320)
+- Origin - (59,268)
 
 **Episode Termination**
 - case 1 : Collision with boundaries
+- case 2 : Collision with hindrences
 
 #### Execution Procedure
 
@@ -88,6 +90,3 @@ Type : Box(4)
 
 To be done
 
-**Youtube Link**
-
-To be done
