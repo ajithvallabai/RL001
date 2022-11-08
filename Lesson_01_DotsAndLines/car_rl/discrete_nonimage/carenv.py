@@ -86,7 +86,7 @@ class CarEnv(Env):
             print("Destination reached")
 
         self.img = getDisplay(self.dot)
-        #cv.waitKey(150)
+        cv.waitKey(150)
 
         # Using distance parameters and awarding reward
         # distance between a line and point
