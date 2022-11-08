@@ -23,6 +23,8 @@
 
 **GIF's**
 
+![Slytherin](./snake_gif.gif)
+
 **Description :**
 - Uses discrete action space
 - Boundaries are the collision points
