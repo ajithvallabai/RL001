@@ -2,12 +2,12 @@ import gym
 from stable_baselines3 import PPO
 from snakeenv import SnakeEnv
 
-models_dir = "models/1667456529_best_trained"
+models_dir = "models/1667882491"
 
 env = SnakeEnv()
 env.reset()
 
-model_path = f"{models_dir}/30000.zip"
+model_path = f"{models_dir}/50000.zip"
 model = PPO.load(model_path, env=env)
 
 episodes = 500
