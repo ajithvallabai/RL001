@@ -58,7 +58,7 @@ class SnakeEnv(Env):
         # check if snake has found the food
         currFoodFetch = False
         if dtFood(self.dot, self.foodLoc) == True:
-            self.foodLoc = [random.randint(1, 511), random.randint(1, 511)]
+            # Todo: Add time limit for food fetch
             self.score += 1
             currFoodFetch = True
             print("Food fetched")
@@ -94,7 +94,8 @@ class SnakeEnv(Env):
         snake_score = self.score
         self.observation = [head_x, head_y, apple_delta_x, apple_delta_y, snake_score] + list(self.prev_actions)
         self.observation = np.array(self.observation)
-
+        if currFoodFetch:
+            self.foodLoc = [random.randint(1, 511), random.randint(1, 511)]
         info = {}
         return self.observation, self.reward, self.done, info
 
