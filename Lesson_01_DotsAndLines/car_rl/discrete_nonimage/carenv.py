@@ -36,13 +36,13 @@ def getDisplay(arr):
     isClosed = True
     thickness = 8
     img = cv.polylines(img, [boundaryPts],
-                        isClosed, (0, 0, 255),
-                        thickness)
-    img = cv.polylines(img, [destPts],
                         isClosed, (0, 255, 0),
                         thickness)
+    img = cv.polylines(img, [destPts],
+                        isClosed, (0, 0, 255),
+                        thickness)
     return img
-
+#Todo : increase memeory and check
 BUFFER_MEMORY = 20
 
 class CarEnv(Env):
@@ -100,16 +100,16 @@ class CarEnv(Env):
 
         if self.done and (destReached==False):
             # For colliding with boundaries
-            self.reward -= 20
+            self.reward -= 200
         elif self.done and destReached:
             # Fetching current food
-            self.reward += (self.score * 100)
+            self.reward += (self.score * 1000)
         elif currDistToDest < prevDistToDest:
             # staying alive and moving towards from food
-            self.reward += 1
+            self.reward += 3
         else:
             # staying alive and moving away from food
-            self.reward -= 1
+            self.reward -= -1 # 0
         print("#######Reward########", self.reward)
 
         # head_x, heady_y,  dest_delta_x, dest_delta_y + previous_moves
