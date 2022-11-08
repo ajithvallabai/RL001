@@ -2,12 +2,12 @@ import gym
 from stable_baselines3 import PPO
 from carenv import CarEnv
 
-models_dir = "models/aaaaa_best_trained"
+models_dir = "models/1667892955"
 
 env = CarEnv()
 env.reset()
 
-model_path = f"{models_dir}/20000.zip"
+model_path = f"{models_dir}/40000.zip"
 model = PPO.load(model_path, env=env)
 
 episodes = 500
