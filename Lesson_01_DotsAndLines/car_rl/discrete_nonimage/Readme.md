@@ -23,6 +23,8 @@
 
 **GIF's**
 
+![Car](./car.gif)
+
 **Description :**
 - Uses discrete action space
 - Boundaries are the collision points
