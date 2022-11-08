@@ -23,7 +23,7 @@
 
 **GIF's**
 
-![Car](./car.gif)
+![Car](./car_gif.gif)
 
 **Description :**
 - Uses discrete action space
