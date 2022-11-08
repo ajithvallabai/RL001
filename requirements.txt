@@ -1,0 +1,4 @@
+torch==1.13.0
+opencv-python==4.6.0
+stable_baselines3==1.6.2
+tensorboard==2.10.1
