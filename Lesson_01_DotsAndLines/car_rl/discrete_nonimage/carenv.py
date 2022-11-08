@@ -42,8 +42,9 @@ def getDisplay(arr):
                         isClosed, (0, 0, 255),
                         thickness)
     return img
-#Todo : increase memeory and check
-BUFFER_MEMORY = 20
+# Increase in buffer memory helps to reach destination
+# post 1 lakh timesteps
+BUFFER_MEMORY = 100
 
 class CarEnv(Env):
     """Car Environment that follows gym interface"""
@@ -85,7 +86,7 @@ class CarEnv(Env):
             print("Destination reached")
 
         self.img = getDisplay(self.dot)
-        cv.waitKey(150)
+        #cv.waitKey(150)
 
         # Using distance parameters and awarding reward
         # distance between a line and point
@@ -110,7 +111,7 @@ class CarEnv(Env):
         else:
             # staying alive and moving away from food
             self.reward -= -1 # 0
-        print("#######Reward########", self.reward)
+        #print("#######Reward########", self.reward)
 
         # head_x, heady_y,  dest_delta_x, dest_delta_y + previous_moves
         self.destPts = np.array([[40, 70], [160, 70]],
