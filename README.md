@@ -6,6 +6,14 @@ Prerequisties:
 - Python
 - Reinforcement learning basics
 
+### Base code for environments/Raw games
+
+| Method | Environments | Link
+| ----   | ------------ | ----
+| Discrete | Snake      | [here](./Lesson_01_DotsAndLines/basic_games/snake.py)
+| Discrete | Car        | [here](./Lesson_01_DotsAndLines/basic_games/car.py)
+| Discrete | Bird       | [here](./Lesson_01_DotsAndLines/basic_games/bird.py)
+
 ### Lesson 01 Dots And Lines
 
 | Lesson        | Environment    |Method | Link |
