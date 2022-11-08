@@ -49,6 +49,7 @@ Type : Box(20)
 |  3  |    delta_y(dest)   |  0    |  512   | 256    |
 |  4  |    snake_score| 0   |  15    |  7   |
 |  5 - 19  |    previous_moves | 0    |  3   | 1 |
+
 **Action**
 
 Type : Box(4)
@@ -80,7 +81,7 @@ Type : Box(4)
 
 **Train in Local**
 - python3 train.py > record.txt
-
+- *For faster training comment out cv.imshow(self.img) in code*
 *You can view rewards for each timestep and other episode details in record.txt*
 
 **Inference in Local**

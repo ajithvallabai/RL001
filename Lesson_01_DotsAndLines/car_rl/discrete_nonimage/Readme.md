@@ -79,7 +79,7 @@ Type : Box(4)
 
 **Train in Local**
 - python3 train.py > record.txt
-
+- *For faster training comment out cv.imshow(self.img) in code*
 *You can view rewards for each timestep and other episode details in record.txt*
 
 **Inference in Local**
