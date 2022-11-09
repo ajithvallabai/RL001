@@ -6,6 +6,13 @@ Prerequisties:
 - Python
 - Reinforcement learning basics
 
+**Gallery**
+
+<img src="./Lesson_01_DotsAndLines/snake_rl/discrete_nonimage/snake_gif.gif" width="400" height="300">
+
+<img src="./Lesson_01_DotsAndLines/car_rl/discrete_nonimage/car_gif.gif" width="400" height="300">
+<img src="Lesson_01_DotsAndLines/bird_rl/discrete_nonimage/bird_gif.gif" width="400" height="300">
+
 ### Base code for environments/Raw games
 
 | Method | Environments | Link

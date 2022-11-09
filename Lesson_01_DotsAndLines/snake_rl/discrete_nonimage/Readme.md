@@ -23,7 +23,7 @@
 
 **GIF's**
 
-<img src="./snake_gif.gif" width="200" height="150">
+<img src="./snake_gif.gif" width="400" height="300">
 
 **Description :**
 - Uses discrete action space
