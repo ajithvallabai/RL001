@@ -23,7 +23,7 @@
 
 **GIF's**
 
-![Car](./car_gif.gif)
+<img src="./car_gif.gif" width="200" height="150">
 
 **Description :**
 - Uses discrete action space
@@ -48,6 +48,7 @@ Type : Box(20)
 |  2  |    delta_x(dest)   |  0    |  512   | 256    |
 |  3  |    delta_y(dest)   |  0    |  512   | 256    |
 |  4 - 18  |    previous_moves | 0    |  3   | 1 |
+
 **Action**
 
 Type : Box(4)
@@ -79,7 +80,7 @@ Type : Box(4)
 
 **Train in Local**
 - python3 train.py > record.txt
-- *For faster training comment out cv.imshow(self.img) in code*
+- *For faster training comment out cv.imshow(self.img) , cv.waitKey() in code*
 *You can view rewards for each timestep and other episode details in record.txt*
 
 **Inference in Local**

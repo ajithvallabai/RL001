@@ -23,7 +23,7 @@
 
 **GIF's**
 
-![Slytherin](./snake_gif.gif)
+<img src="./snake_gif.gif" width="200" height="150">
 
 **Description :**
 - Uses discrete action space
@@ -81,7 +81,7 @@ Type : Box(4)
 
 **Train in Local**
 - python3 train.py > record.txt
-- *For faster training comment out cv.imshow(self.img) in code*
+- *For faster training comment out cv.imshow(self.img) , cv.waitKey() in code*
 *You can view rewards for each timestep and other episode details in record.txt*
 
 **Inference in Local**
