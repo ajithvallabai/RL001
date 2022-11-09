@@ -99,7 +99,7 @@ class CarEnv(Env):
         #     )/ np.linalg.norm(self.destPts[1] - self.destPts[0])
         midDest = [(self.destPts[0]+ self.destPts[0])/2, (self.destPts[1]+self.destPts[1])/2]
         currDistToDest = np.linalg.norm(np.array(self.dot)-np.array(midDest))
-        prevDistToDest = np.linalg.norm(np.array(self.dot)-np.array(midDest))
+        prevDistToDest = np.linalg.norm(np.array(previousArr)-np.array(midDest))
         if self.done and (destReached==False):
             # For colliding with boundaries
             self.reward -= 400
